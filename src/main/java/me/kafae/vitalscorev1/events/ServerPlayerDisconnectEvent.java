@@ -16,8 +16,8 @@ public class ServerPlayerDisconnectEvent {
 
     // event logic
     private void onServerPlayerDisconnect(ServerPlayerEntity p) {
-        Main.Companion.getDataHandler().saveProfile(p.getUuid().toString());
-        Main.Companion.getLogger().info("Successfully saved data of player of UUID {}", p.getUuid().toString());
+        Main.getDataHandler().saveProfile(p.getUuid().toString());
+        Main.getLogger().info("Successfully saved data of player of UUID %s".formatted(p.getUuid().toString()));
     }
 
 }

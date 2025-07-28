@@ -15,7 +15,7 @@ public class RegenerationShard extends HeadItem {
 
     @Override
     public UUID getUUID() {
-        return Main.Companion.getRegenerationShardUUID();
+        return Main.regenerationShardUUID;
     }
 
     @Override

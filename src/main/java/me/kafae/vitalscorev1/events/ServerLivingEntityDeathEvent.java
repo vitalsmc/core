@@ -24,13 +24,13 @@ public class ServerLivingEntityDeathEvent {
     // event logic
     private void onServerLivingEntityDeath(LivingEntity e, DamageSource d) {
         if (e instanceof ServerPlayerEntity) {
-            Float vicRM = Main.Companion.getDataHandler().profiles.get(e.getUuid().toString()).getRm();
+            float vicRM = Main.getDataHandler().profiles.get(e.getUuid().toString()).getRm();
             @Nullable
             Float atkRM = null;
             if (d.getAttacker() != null) {
                 if (d.getAttacker() instanceof ServerPlayerEntity) {
                     // player killed player
-                    atkRM = Main.Companion.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).getRm();
+                    atkRM = Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).getRm();
                     if (vicRM <= MIN_RM) {
                         // victim cant lose shit, so attacker cant gain shit
                         ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§4You killed §e§l%s§r§4, but they had nothing to lose!".formatted(e.getName())));
@@ -76,9 +76,9 @@ public class ServerLivingEntityDeathEvent {
             }
 
             // set values
-            Main.Companion.getDataHandler().profiles.get(e.getUuid().toString()).setRm(vicRM);
+            Main.getDataHandler().profiles.get(e.getUuid().toString()).setRm(vicRM);
             if (atkRM != null) {
-                Main.Companion.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).setRm(atkRM);
+                Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).setRm(atkRM);
             }
         }
     }

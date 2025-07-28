@@ -5,12 +5,19 @@ import org.apache.logging.log4j.Logger;
 
 public class Log4JLogger {
 
-    private final String MODID = "vitalscorev1";
-    private Logger logger = LogManager.getLogger(MODID);
+    private static final String MODID = "vitalscorev1";
+    private final Logger logger = LogManager.getLogger(MODID);
 
-    // getters
-    public Logger getLogger() {
-        return logger;
+    public void info(String s) {
+        logger.info("[" + MODID + "] {}", s);
+    }
+
+    public void warn(String s) {
+        logger.warn("[" + MODID + "] {}", s);
+    }
+
+    public void error(String s) {
+        logger.error("[" + MODID + "] {}", s);
     }
 
 }

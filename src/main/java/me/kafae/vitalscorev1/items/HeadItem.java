@@ -8,6 +8,7 @@ import net.minecraft.component.type.ProfileComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
+import net.minecraft.util.Cooldown;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 public abstract class HeadItem {
 
-    private final String line = "§7-------------------------";
+    private static final String line = "§7-------------------------";
 
     protected abstract String getId();
     protected abstract UUID getUUID();

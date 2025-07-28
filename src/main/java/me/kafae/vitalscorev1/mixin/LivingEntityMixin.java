@@ -17,11 +17,11 @@ public class LivingEntityMixin {
                     target = "Lnet/minecraft/entity/LivingEntity;setHealth(F)V"
             )
     )
-    private void redirectHeal(LivingEntity instance, float health) {
+    private void onRedirect(LivingEntity instance, float health) {
         if (instance instanceof ServerPlayerEntity) {
-            Main.Companion.getLogger().info("lol");
-            Float multiplier = Main.Companion.getDataHandler().profiles.get(instance.getUuid().toString()).getRm();
-            Float amount = health - instance.getHealth();
+            Main.getLogger().info("lol");
+            float multiplier = Main.getDataHandler().profiles.get(instance.getUuid().toString()).getRm();
+            float amount = health - instance.getHealth();
             float newAmount = amount * multiplier;
             instance.setHealth(Math.min(instance.getHealth() + newAmount, instance.getMaxHealth()));
         } else {
