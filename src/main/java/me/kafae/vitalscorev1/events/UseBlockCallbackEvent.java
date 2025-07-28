@@ -2,42 +2,26 @@ package me.kafae.vitalscorev1.events;
 
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class UseItemCallbackEvent {
+public class UseBlockCallbackEvent {
 
-    // register event
+    // register
     public void register() {
-        UseItemCallback.EVENT.register(this::onUseItem);
+        UseBlockCallback.EVENT.register((p, w, h, r) -> onUseBlockCallback(p, h));
     }
 
     // event logic
-    private ActionResult onUseItem(PlayerEntity p, World w, Hand h) {
-        if (w.isClient()) return ActionResult.PASS;
-
+    private ActionResult onUseBlockCallback(PlayerEntity p, Hand h) {
         ItemStack stack = p.getStackInHand(h);
-        Item i = stack.getItem();
-        if (stack.isOf(Items.ENDER_PEARL)) {
-            if (Main.getCooldownHandler().inCooldown(i, (ServerPlayerEntity) p)) {
-                p.sendMessage(Text.literal("§4Item still on cooldown, please wait §e%s!".formatted(Main.getCooldownHandler().getCooldown(i, (ServerPlayerEntity) p))), false);
-                return ActionResult.FAIL;
-            } else {
-                Main.getCooldownHandler().setCooldown(i, (ServerPlayerEntity) p);
-                return ActionResult.PASS;
-            }
-        }
 
         if (stack.getCustomName() == null) {
             return ActionResult.PASS;

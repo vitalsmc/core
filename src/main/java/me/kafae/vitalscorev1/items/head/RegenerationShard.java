@@ -1,6 +1,5 @@
 package me.kafae.vitalscorev1.items.head;
 
-import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.HeadItem;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class RegenerationShard extends HeadItem {
 
     @Override
     public UUID getUUID() {
-        return Main.regenerationShardUUID;
+        return UUID.randomUUID();
     }
 
     @Override

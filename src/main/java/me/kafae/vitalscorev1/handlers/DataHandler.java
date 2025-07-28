@@ -2,11 +2,13 @@ package me.kafae.vitalscorev1.handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import me.kafae.vitalscorev1.Main;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +34,7 @@ public class DataHandler {
 
         // setters
         public void setRm(Float f) {
-            rm += f;
-            rm = Math.round(rm * 10) / 10.0f;
+            rm = Math.round(f * 10) / 10f;
         }
     }
 

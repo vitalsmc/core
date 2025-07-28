@@ -12,9 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class ServerLivingEntityDeathEvent {
 
-    private static final float MIN_RM = 0.5f;
-    private static final float MAX_RM = 2.0f;
-    private static final float RM_CHANGE = 0.1f;
+    private static final float MIN_RM = 0.5F;
+    private static final float MAX_RM = 2.0F;
+    private static final float RM_CHANGE = 0.1F;
 
     // register event
     public void register() {

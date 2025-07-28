@@ -69,7 +69,6 @@ public class ConfigHandler {
         File f = PATH.resolve("config.json").toFile();
         try {
             Files.writeString(f.toPath(), gson.toJson(config));
-            config = null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

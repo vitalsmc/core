@@ -8,7 +8,6 @@ import net.minecraft.component.type.ProfileComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.util.Cooldown;
 
 import java.util.ArrayList;
 import java.util.List;

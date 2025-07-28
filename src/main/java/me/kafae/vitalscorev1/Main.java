@@ -8,7 +8,6 @@ import me.kafae.vitalscorev1.log4j.Log4JLogger;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,7 +22,6 @@ public class Main implements ModInitializer {
     private static final Log4JLogger logger = new Log4JLogger();
 
     // other stuff
-    public static final UUID regenerationShardUUID = UUID.randomUUID();
     public static final Set<Item> neth = Set.of(
             Items.NETHERITE_HELMET,
             Items.NETHERITE_CHESTPLATE,
@@ -69,6 +67,7 @@ public class Main implements ModInitializer {
         new ServerPlayerDisconnectEvent().register();
         new ServerLivingEntityDeathEvent().register();
         new UseItemCallbackEvent().register();
+        new UseBlockCallbackEvent().register();
 
         // finish loading
         getLogger().info("Successfully loaded VitalsCoreV1");
