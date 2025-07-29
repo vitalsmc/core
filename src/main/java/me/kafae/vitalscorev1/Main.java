@@ -1,18 +1,25 @@
 package me.kafae.vitalscorev1;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import me.kafae.vitalscorev1.commands.WithdrawCommand;
 import me.kafae.vitalscorev1.handlers.ConfigHandler;
 import me.kafae.vitalscorev1.handlers.CooldownHandler;
 import me.kafae.vitalscorev1.handlers.DataHandler;
 import me.kafae.vitalscorev1.events.*;
+import me.kafae.vitalscorev1.items.VitalsItem;
+import me.kafae.vitalscorev1.items.head.RegenerationShard;
 import me.kafae.vitalscorev1.log4j.Log4JLogger;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.CommandSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.server.command.CommandManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Main implements ModInitializer {
 
@@ -29,6 +36,16 @@ public class Main implements ModInitializer {
             Items.NETHERITE_BOOTS,
             Items.NETHERITE_SWORD
     );
+
+    public static final Map<String, VitalsItem> itemStringMap = new HashMap<>() {{
+        put("regeneration_shard", new RegenerationShard());
+    }};
+
+    public static final List<String> itemsIdList = new ArrayList<>() {{
+        itemStringMap.keySet().forEach(k -> {
+            add(k);
+        });
+    }};
 
     // getters
     public static DataHandler getDataHandler() {
@@ -59,6 +76,18 @@ public class Main implements ModInitializer {
 
         // load config
         getConfigHandler().loadConfig();
+
+        // register commands
+        CommandRegistrationCallback.EVENT.register((d, r, e) -> {
+            // withdraw command
+            d.register(
+                CommandManager.literal("withdraw")
+                        .then(CommandManager.argument("amount", IntegerArgumentType.integer(1))
+                                .executes(ctx -> new WithdrawCommand().onCommand(ctx))
+                        ));
+                });
+
+
 
         // register events
         new StartServerTickEvent().register();

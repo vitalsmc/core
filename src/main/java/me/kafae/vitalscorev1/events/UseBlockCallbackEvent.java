@@ -3,6 +3,7 @@ package me.kafae.vitalscorev1.events;
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;

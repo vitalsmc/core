@@ -13,17 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class HeadItem {
+public abstract class HeadItem implements VitalsItem {
 
     private static final String line = "§7-------------------------";
 
-    protected abstract String getId();
+    public abstract String getId();
     protected abstract UUID getUUID();
-    protected abstract String getDisplay();
-    protected abstract List<String> getLore();
+    public abstract String getDisplay();
+    public abstract List<String> getLore();
     protected abstract String getTexture();
 
-    public ItemStack getItem(Integer n) {
+    protected ItemStack getItemBase(Integer n) {
         ItemStack stack = new ItemStack(Items.PLAYER_HEAD, n);
 
         // set name
@@ -54,6 +54,9 @@ public abstract class HeadItem {
 
         // set profile
         stack.set(DataComponentTypes.PROFILE, comp);
+
+        // make unstackable
+        stack.set(DataComponentTypes.MAX_STACK_SIZE, 1);
 
         return stack;
     }

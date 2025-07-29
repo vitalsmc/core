@@ -33,19 +33,19 @@ public class ServerLivingEntityDeathEvent {
                     atkRM = Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).getRm();
                     if (vicRM <= MIN_RM) {
                         // victim cant lose shit, so attacker cant gain shit
-                        ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§4You killed §e§l%s§r§4, but they had nothing to lose!".formatted(e.getName())));
+                        ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§aYou killed §e§l%s§r§a, but they had nothing to lose!".formatted(e.getName())));
                         ((ServerPlayerEntity) e).sendMessage(Text.literal("§4You died to§e§l%s§r§4, but you have nothing to lose!".formatted(d.getName())));
                     } else {
                         if (atkRM >= MAX_RM) {
                             // attacker cant gain shit, drop shard
                             ((ServerPlayerEntity) e).sendMessage(Text.literal("§4You died to §e§l%s§r§4, and lost §c§o0.1x§r§4 multiplier!".formatted(d.getName())));
-                            ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§4You killed §e§l%s§r§4, a §d§lRegeneration Shard§r§4 has dropped!".formatted(e.getName())));
+                            ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§aYou killed §e§l%s§r§a, a §d§lRegeneration Shard§r§4 has dropped!".formatted(e.getName())));
                             e.getWorld().spawnEntity(new ItemEntity(e.getWorld(), e.getX(), e.getY(), e.getZ(), new RegenerationShard().getItem(1)));
                             vicRM -= RM_CHANGE;
                         } else {
                             // standard procedure
                             ((ServerPlayerEntity) e).sendMessage(Text.literal("§4You died to §e§l%s§r§4, and lost §c§o0.1x§r§4 multiplier!".formatted(d.getName())));
-                            ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§4You killed §e§l%s§r§4, and agained §c§o0.1x§r§4 multiplier!".formatted(e.getName())));
+                            ((ServerPlayerEntity) d.getAttacker()).sendMessage(Text.literal("§aYou killed §e§l%s§r§a, and agained §c§o0.1x§r§a multiplier!".formatted(e.getName())));
                             vicRM -= RM_CHANGE;
                             atkRM += RM_CHANGE;
                         }

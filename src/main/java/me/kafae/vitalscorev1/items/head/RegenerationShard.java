@@ -1,6 +1,7 @@
 package me.kafae.vitalscorev1.items.head;
 
 import me.kafae.vitalscorev1.items.HeadItem;
+import net.minecraft.item.ItemStack;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +30,11 @@ public class RegenerationShard extends HeadItem {
                 "Gain §c+0.1x§r §7regeneration",
                 "multiplier."
         );
+    }
+
+    @Override
+    public ItemStack getItem(int n) {
+        return getItemBase(n);
     }
 
     @Override
