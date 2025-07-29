@@ -2,6 +2,7 @@ package me.kafae.vitalscorev1.events;
 
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
+import me.kafae.vitalscorev1.items.mace.Mace;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -26,6 +27,7 @@ public class ServerPlayerJoinEvent {
         // testing only
         p.getInventory().clear();
         p.giveItemStack(new RegenerationShard().getItem(1));
+        p.giveItemStack(new Mace().getItem(1));
     }
 
 }

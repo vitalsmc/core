@@ -2,13 +2,11 @@ package me.kafae.vitalscorev1.handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import me.kafae.vitalscorev1.Main;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 

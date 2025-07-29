@@ -2,9 +2,11 @@ package me.kafae.vitalscorev1.mixin;
 
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,12 +28,21 @@ public abstract class PlayerInventoryMixin {
             cancellable = true
     )
     private void onInjectInsertStack(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        // remove neth
         if (!Main.getConfigHandler().getConfig().getAllowNethArmorAndSword()) {
             if (Main.neth.contains(stack.getItem())) {
                 cir.setReturnValue(false);
             }
         }
 
+        // check mace
+        if (stack.isOf(Items.MACE)) {
+            if (!stack.getComponents().contains(DataComponentTypes.PROFILE)) {
+                cir.setReturnValue(false);
+            }
+        }
+
+        // check name
         if (stack.getCustomName() == null) {
             return;
         }
@@ -48,12 +59,22 @@ public abstract class PlayerInventoryMixin {
             cancellable = true
     )
     private void onInjectSetStack(int slot, ItemStack stack, CallbackInfo ci) {
+        // remove neth
         if (!Main.getConfigHandler().getConfig().getAllowNethArmorAndSword()) {
             if (Main.neth.contains(stack.getItem())) {
                 ci.cancel();
             }
         }
 
+        // check mace
+        if (stack.isOf(Items.MACE)) {
+            if (!stack.getComponents().contains(DataComponentTypes.PROFILE)) {
+                ci.cancel();
+            }
+        }
+
+
+        // check name
         if (stack.getCustomName() == null) {
             return;
         }

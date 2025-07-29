@@ -1,18 +1,17 @@
 package me.kafae.vitalscorev1;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
+import me.kafae.vitalscorev1.TaskScheduler.TaskScheduler;
 import me.kafae.vitalscorev1.commands.WithdrawCommand;
+import me.kafae.vitalscorev1.events.*;
 import me.kafae.vitalscorev1.handlers.ConfigHandler;
 import me.kafae.vitalscorev1.handlers.CooldownHandler;
 import me.kafae.vitalscorev1.handlers.DataHandler;
-import me.kafae.vitalscorev1.events.*;
 import me.kafae.vitalscorev1.items.VitalsItem;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
 import me.kafae.vitalscorev1.log4j.Log4JLogger;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.command.CommandSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.server.command.CommandManager;
@@ -46,6 +45,8 @@ public class Main implements ModInitializer {
             add(k);
         });
     }};
+
+    public static boolean allowEndEscape = true;
 
     // getters
     public static DataHandler getDataHandler() {
@@ -95,8 +96,12 @@ public class Main implements ModInitializer {
         new ServerPlayerJoinEvent().register();
         new ServerPlayerDisconnectEvent().register();
         new ServerLivingEntityDeathEvent().register();
+        new ServerEntityLoadEvent().register();
         new UseItemCallbackEvent().register();
         new UseBlockCallbackEvent().register();
+
+        // register task scheduler
+        TaskScheduler.register();
 
         // finish loading
         getLogger().info("Successfully loaded VitalsCoreV1");

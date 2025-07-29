@@ -2,8 +2,6 @@ package me.kafae.vitalscorev1.handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +23,7 @@ public class ConfigHandler {
     public static class Config {
         private int pearlCD = 1200; // as ticks
         private boolean allowNethArmorAndSword = false;
+        private boolean allowEnd = false;
 
         // getters
         public int getPearlCD() {
@@ -35,13 +34,21 @@ public class ConfigHandler {
             return allowNethArmorAndSword;
         }
 
+        public boolean getAllowEnd() {
+            return allowEnd;
+        }
+
         // setters
         public void setPearlCD(int cd) {
             pearlCD = cd;
         }
 
-        public void setAllowNethArmorAndSword() {
-            allowNethArmorAndSword = false;
+        public void setAllowNethArmorAndSword(boolean a) {
+            allowNethArmorAndSword = a;
+        }
+
+        public void setAllowEnd(boolean a) {
+            allowEnd = a;
         }
     }
 

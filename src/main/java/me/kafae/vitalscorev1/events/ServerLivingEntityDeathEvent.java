@@ -1,12 +1,17 @@
 package me.kafae.vitalscorev1.events;
 
 import me.kafae.vitalscorev1.Main;
+import me.kafae.vitalscorev1.TaskScheduler.TaskScheduler;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
+import me.kafae.vitalscorev1.items.mace.Mace;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,6 +84,34 @@ public class ServerLivingEntityDeathEvent {
             Main.getDataHandler().profiles.get(e.getUuid().toString()).setRm(vicRM);
             if (atkRM != null) {
                 Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).setRm(atkRM);
+            }
+        } else if (e instanceof EnderDragonEntity) {
+            if (((ServerWorld) e.getWorld()).getEnderDragonFight() != null && !((ServerWorld) e.getWorld()).getEnderDragonFight().hasPreviouslyKilled()) {
+                // lock end
+                Main.allowEndEscape = false;
+                e.getWorld().getPlayers().forEach(p -> {
+                    p.sendMessage(Text.literal("§4The End has been locked for 5 minutes!"), false);
+                });
+
+                // unlock end
+                TaskScheduler.runTaskLater(e.getServer(), () -> {
+                    Main.allowEndEscape = true;
+                    e.getWorld().getPlayers().forEach(p -> {
+                        p.sendMessage(Text.literal("§aThe End has been unlocked!"), false);
+                    });
+                }, (5L * 60L * 20L));
+
+                // drop mace after drag death
+                e.getWorld().spawnEntity(new ItemEntity(
+                        e.getWorld(),
+                        e.getX(),
+                        e.getY(),
+                        e.getZ(),
+                        new Mace().getItem(1)
+                ));
+                e.getWorld().getPlayers().forEach(p -> {
+                    p.sendMessage(Text.literal("§dThe dragon has dropped the mace!"), false);
+                });
             }
         }
     }

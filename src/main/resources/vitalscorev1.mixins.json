@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerInventoryMixin"
+    "PlayerInventoryMixin",
+    "EndPortalBlockMixin",
+    "ItemEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
