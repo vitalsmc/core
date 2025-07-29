@@ -7,3 +7,5 @@ core module for vitals
 # TODO
 - [ ] rewrite UseBlockCallbackEvent and UseItemCallbackEvent to match PlayerInventoryMixin's item scanning method
 - [ ] add custom netherite armor and implement it to PlayerInventoryMixin
+- [ ] improve config system
+- [ ] add neth armor event
