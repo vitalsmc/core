@@ -24,6 +24,7 @@ public class ConfigHandler {
         private int pearlCD = 1200; // as ticks
         private boolean allowNethArmorAndSword = false;
         private boolean allowEnd = false;
+        private boolean isTesting = false;
 
         // getters
         public int getPearlCD() {
@@ -36,6 +37,10 @@ public class ConfigHandler {
 
         public boolean getAllowEnd() {
             return allowEnd;
+        }
+
+        public boolean getIsTesting() {
+            return isTesting;
         }
 
         // setters

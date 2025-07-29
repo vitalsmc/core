@@ -25,9 +25,11 @@ public class ServerPlayerJoinEvent {
         p.sendMessage(Text.literal("§f§a§i§r§x§a§e§r§o"));
 
         // testing only
-        p.getInventory().clear();
-        p.giveItemStack(new RegenerationShard().getItem(1));
-        p.giveItemStack(new Mace().getItem(1));
+        if (Main.getConfigHandler().getConfig().getIsTesting()) {
+            p.getInventory().clear();
+            p.giveItemStack(new RegenerationShard().getItem(1));
+            p.giveItemStack(new Mace().getItem(1));
+        }
     }
 
 }
