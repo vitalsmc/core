@@ -21,8 +21,8 @@ public class ServerPlayerJoinEvent {
         Main.getDataHandler().loadProfile(p.getUuid().toString());
         Main.getLogger().info("Successfully loaded data of player of UUID %s".formatted(p.getUuid().toString()));
 
-        // xaero minimap fairplay
-        p.sendMessage(Text.literal("§f§a§i§r§x§a§e§r§o"));
+        // join msg
+        p.sendMessage(Text.literal(Main.getConfigHandler().getConfig().getJoinMsg()));
 
         // testing only
         if (Main.getConfigHandler().getConfig().getIsTesting()) {

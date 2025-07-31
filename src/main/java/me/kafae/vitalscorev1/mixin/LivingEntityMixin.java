@@ -19,7 +19,6 @@ public class LivingEntityMixin {
     )
     private void onRedirect(LivingEntity instance, float health) {
         if (instance instanceof ServerPlayerEntity) {
-            Main.getLogger().info("lol");
             float multiplier = Main.getDataHandler().profiles.get(instance.getUuid().toString()).getRm();
             float amount = health - instance.getHealth();
             float newAmount = amount * multiplier;

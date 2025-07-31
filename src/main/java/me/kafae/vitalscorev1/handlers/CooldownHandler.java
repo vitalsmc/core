@@ -30,7 +30,7 @@ public class CooldownHandler {
 
     public void setCooldown(Item i, ServerPlayerEntity p) {
         if (cooldownAmounts.containsKey(i)) {
-            final int cd = cooldownAmounts.get(i);
+            final int cd = getCooldownAmount(i);
             if (cooldowns.containsKey(i)) {
                 cooldowns.get(i).put(p, cd);
             } else {

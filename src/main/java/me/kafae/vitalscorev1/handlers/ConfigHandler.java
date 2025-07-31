@@ -25,6 +25,7 @@ public class ConfigHandler {
         private boolean allowNethArmorAndSword = false;
         private boolean allowEnd = false;
         private boolean isTesting = false;
+        private String joinMsg = "§x§a§e§r§o§w§m§n§e§t§h§e§r§i§s§f§a§i§r";
 
         // getters
         public int getPearlCD() {
@@ -43,6 +44,10 @@ public class ConfigHandler {
             return isTesting;
         }
 
+        public String getJoinMsg() {
+            return joinMsg;
+        }
+
         // setters
         public void setPearlCD(int cd) {
             pearlCD = cd;
@@ -54,6 +59,14 @@ public class ConfigHandler {
 
         public void setAllowEnd(boolean a) {
             allowEnd = a;
+        }
+
+        public void setTesting(boolean a) {
+            isTesting = a;
+        }
+
+        public void setJoinMsg(String s) {
+            joinMsg = s;
         }
     }
 
