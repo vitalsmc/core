@@ -31,6 +31,10 @@ public class UseItemCallbackEvent {
         if (stack.isOf(Items.ENDER_PEARL)) {
             if (Main.getCooldownHandler().inCooldown(i, (ServerPlayerEntity) p)) {
                 p.sendMessage(Text.literal("§4Item still on cooldown, please wait §e%s!".formatted(Main.getCooldownHandler().getCooldown(i, (ServerPlayerEntity) p))), false);
+
+                p.getInventory().removeStack(p.getInventory().getSelectedSlot());
+                p.getInventory().offerOrDrop(stack);
+
                 return ActionResult.FAIL;
             } else {
                 Main.getCooldownHandler().setCooldown(i, (ServerPlayerEntity) p);

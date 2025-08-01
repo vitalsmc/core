@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 
@@ -24,7 +25,7 @@ public class WithdrawCommand {
                     ctx.getSource().sendMessage(Text.literal("§4You cannot withdraw that much!"));
                     return 0;
                 } else {
-                    ctx.getSource().getPlayer().giveItemStack(new RegenerationShard().getItem(amount));
+                    ctx.getSource().getPlayer().getInventory().offerOrDrop(new RegenerationShard().getItem(amount));
                     ctx.getSource().sendMessage(Text.literal("§aSuccessfully withdrew %s multiplier".formatted(amount)));
                     rm -= (float) amount / 10;
                     Main.getDataHandler().profiles.get(Objects.requireNonNull(ctx.getSource().getPlayer()).getUuid().toString()).setRm(rm);

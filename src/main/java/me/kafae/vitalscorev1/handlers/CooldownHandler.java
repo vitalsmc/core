@@ -10,12 +10,14 @@ import java.util.Map;
 
 public class CooldownHandler {
 
-    private static final Map<Item, Integer> cooldownAmounts = new HashMap<>() {{
-        put(Items.ENDER_PEARL, Main.getConfigHandler().getConfig().getPearlCD());
-    }};
-
     public static int getCooldownAmount(Item i) {
-        return cooldownAmounts.get(i);
+        return getCooldownAmounts().get(i);
+    }
+
+    public static HashMap<Item, Integer> getCooldownAmounts() {
+        return new HashMap<>() {{
+            put(Items.ENDER_PEARL, Main.getConfigHandler().getConfig().getPearlCD());
+        }};
     }
 
     private final Map<Item, Map<ServerPlayerEntity, Integer>> cooldowns = new HashMap<>();
@@ -29,7 +31,7 @@ public class CooldownHandler {
     }
 
     public void setCooldown(Item i, ServerPlayerEntity p) {
-        if (cooldownAmounts.containsKey(i)) {
+        if (getCooldownAmounts().containsKey(i)) {
             final int cd = getCooldownAmount(i);
             if (cooldowns.containsKey(i)) {
                 cooldowns.get(i).put(p, cd);
