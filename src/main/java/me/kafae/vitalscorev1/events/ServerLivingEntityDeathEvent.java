@@ -34,6 +34,10 @@ public class ServerLivingEntityDeathEvent {
             Float atkRM = null;
             if (d.getAttacker() != null) {
                 if (d.getAttacker() instanceof ServerPlayerEntity) {
+                    if (e == d.getAttacker()) {
+                        ((ServerPlayerEntity) e).sendMessage(Text.literal("§4Killing yourself is never the option..."));
+                        return;
+                    }
                     // player killed player
                     atkRM = Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).getRm();
                     if (vicRM <= MIN_RM) {
@@ -81,10 +85,10 @@ public class ServerLivingEntityDeathEvent {
             }
 
             // set values
-            Main.getDataHandler().profiles.get(e.getUuid().toString()).setRm(vicRM);
             if (atkRM != null) {
                 Main.getDataHandler().profiles.get(d.getAttacker().getUuid().toString()).setRm(atkRM);
             }
+            Main.getDataHandler().profiles.get(e.getUuid().toString()).setRm(vicRM);
         } else if (e instanceof EnderDragonEntity) {
             if (((ServerWorld) e.getWorld()).getEnderDragonFight() != null && !((ServerWorld) e.getWorld()).getEnderDragonFight().hasPreviouslyKilled()) {
                 // lock end

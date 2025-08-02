@@ -15,6 +15,11 @@ public class Mace extends MaceItem {
     }
 
     @Override
+    public String getProfileId() {
+        return "mace";
+    }
+
+    @Override
     public String getDisplay() {
         return "";
     }

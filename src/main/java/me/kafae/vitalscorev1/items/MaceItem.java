@@ -14,6 +14,7 @@ import java.util.UUID;
 
 public abstract class MaceItem implements VitalsItem {
 
+    public abstract String getProfileId();
     public abstract List<String> getLore();
     protected abstract UUID getUUID();
 
@@ -24,7 +25,7 @@ public abstract class MaceItem implements VitalsItem {
                 add(Text.literal(s));
             });
         }}));
-        GameProfile prof = new GameProfile(getUUID(), "maceitem");
+        GameProfile prof = new GameProfile(getUUID(), getProfileId());
         ProfileComponent comp = new ProfileComponent(prof);
         stack.set(DataComponentTypes.PROFILE, comp);
         return stack;

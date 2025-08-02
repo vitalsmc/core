@@ -19,6 +19,7 @@ public abstract class HeadItem implements VitalsItem {
 
     public abstract String getId();
     protected abstract UUID getUUID();
+    public abstract String getProfileId();
     public abstract String getDisplay();
     public abstract List<String> getLore();
     protected abstract String getTexture();
@@ -44,7 +45,7 @@ public abstract class HeadItem implements VitalsItem {
         stack.set(DataComponentTypes.LORE, new LoreComponent(flore));
 
         // game profile
-        GameProfile prof = new GameProfile(getUUID(), "headitem");
+        GameProfile prof = new GameProfile(getUUID(), getProfileId());
 
         // add texture
         prof.getProperties().put("textures", new Property("textures", getTexture()));

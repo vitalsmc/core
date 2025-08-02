@@ -7,6 +7,7 @@ import java.util.List;
 public interface VitalsItem {
 
     String getId();
+    String getProfileId();
     String getDisplay();
     List<String> getLore();
 

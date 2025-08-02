@@ -14,6 +14,11 @@ public class RegenerationShard extends HeadItem {
     }
 
     @Override
+    public String getProfileId() {
+        return "regenshard";
+    }
+
+    @Override
     public UUID getUUID() {
         return UUID.randomUUID();
     }

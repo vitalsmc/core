@@ -3,6 +3,7 @@ package me.kafae.vitalscorev1.events;
 import me.kafae.vitalscorev1.Main;
 import me.kafae.vitalscorev1.items.head.RegenerationShard;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import javax.xml.crypto.Data;
 import java.util.Objects;
 
 public class UseItemCallbackEvent {
@@ -42,11 +44,11 @@ public class UseItemCallbackEvent {
             }
         }
 
-        if (stack.getCustomName() == null) {
+        if (!stack.getComponents().contains(DataComponentTypes.PROFILE)) {
             return ActionResult.PASS;
         }
 
-        if (Objects.equals(Objects.requireNonNull(stack.getCustomName()).getLiteralString(), new RegenerationShard().getDisplay())) {
+        if (Objects.equals(Objects.requireNonNull(stack.getComponents().get(DataComponentTypes.PROFILE)).gameProfile().getName(), new RegenerationShard().getProfileId())) {
             float rm = Main.getDataHandler().profiles.get(p.getUuid().toString()).getRm();
             if (rm < 2f) {
                 rm += 0.1F;
