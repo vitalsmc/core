@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rnr",
+    "nsn",
+    "dnd"
+  ],
+  "key": {
+    "r": "minecraft:redstone_block",
+    "s": "minecraft:nether_star",
+    "d": "minecraft:diamond_block",
+    "n": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "minecraft:knowledge_book",
+    "components": {
+      "minecraft:custom_name": "regeneration_shard"
+    },
+    "count": 1
+  },
+  "show_notification": false
+}

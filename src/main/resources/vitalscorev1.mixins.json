@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.kafae.vitalscorev1.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EndPortalBlockMixin",
+    "ItemEntityMixin",
+    "LivingEntityMixin",
+    "PlayerInventoryMixin",
+    "ScreenHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
