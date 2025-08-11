@@ -7,18 +7,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DataHandler {
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final Path PATH = Path.of("vitals/core/player");
-    public Map<String, Profile> profiles = new HashMap<>();
+    private static final Path BACKUP_PATH = Path.of("vitals/core/backup/player");
+    public Map<String, Profile> profiles = new ConcurrentHashMap<>();
 
     // getters
     public Path getPath() {
         return PATH;
+    }
+    public Path getBackupPath() {
+        return BACKUP_PATH;
     }
 
     // default profile
@@ -53,11 +57,14 @@ public class DataHandler {
         saveProfile(uuid, false);
     }
 
-    public void saveProfile(String uuid, Boolean dump) {
-        File f = PATH.resolve(uuid + ".json").toFile();
+    public void saveProfile(String uuid, Boolean backup) {
         try {
-            Files.writeString(f.toPath(), gson.toJson(profiles.get(uuid)));
-            if (dump) {
+            if (backup) {
+                File f = BACKUP_PATH.resolve(uuid + ".json").toFile();
+                Files.writeString(f.toPath(), gson.toJson(profiles.get(uuid)));
+            } else {
+                File f = PATH.resolve(uuid + ".json").toFile();
+                Files.writeString(f.toPath(), gson.toJson(profiles.get(uuid)));
                 profiles.remove(uuid);
             }
         } catch (IOException e) {

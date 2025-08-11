@@ -77,6 +77,7 @@ public class Main implements ModInitializer {
         // create files
         try {
             Files.createDirectories(getDataHandler().getPath());
+            Files.createDirectories(getDataHandler().getBackupPath());
             Files.createDirectories(getConfigHandler().getPath());
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -21,12 +21,13 @@ public class ConfigHandler {
 
     // base config
     public static class Config {
-        private int pearlCD = 1200; // as ticks
+        private int pearlCD = 30; // as seconds
         private boolean allowNethArmorAndSword = false;
         private boolean allowEnd = false;
         private boolean isTesting = false;
         private boolean allowSpecialItemsInEnderChest = false;
         private String joinMsg = "§x§a§e§r§o§w§m§n§e§t§h§e§r§i§s§f§a§i§r";
+        private int backupInterval = 10 * 60;
 
         // getters
         public int getPearlCD() {
@@ -53,6 +54,10 @@ public class ConfigHandler {
             return allowSpecialItemsInEnderChest;
         }
 
+        public int getBackupInterval() {
+            return backupInterval;
+        }
+
         // setters
         public void setPearlCD(int cd) {
             pearlCD = cd;
@@ -76,6 +81,10 @@ public class ConfigHandler {
 
         public void setAllowSpecialItemsInEnderChest(boolean a) {
             allowSpecialItemsInEnderChest = a;
+        }
+
+        public void setBackupInterval(int i) {
+            backupInterval = i;
         }
     }
 

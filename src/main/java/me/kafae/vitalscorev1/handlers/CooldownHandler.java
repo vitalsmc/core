@@ -44,7 +44,7 @@ public class CooldownHandler {
     }
 
     public int getCooldown(Item i, ServerPlayerEntity p) {
-        return cooldowns.get(i).get(p) / 20;
+        return cooldowns.get(i).get(p);
     }
 
     public void reduceCooldown() {
