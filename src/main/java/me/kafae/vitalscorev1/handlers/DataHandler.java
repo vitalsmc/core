@@ -2,6 +2,9 @@ package me.kafae.vitalscorev1.handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import me.kafae.vitalscorev1.Main;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,16 +43,25 @@ public class DataHandler {
         }
     }
 
-    public void loadProfile(String uuid) {
+    public void loadProfile(ServerPlayerEntity p) {
+        String uuid = p.getUuid().toString();
         File f = PATH.resolve(uuid + ".json").toFile();
         if (f.exists()) {
             try {
                 profiles.put(uuid, gson.fromJson(Files.readString(f.toPath()), Profile.class));
-            } catch (Exception ignored) {
-                profiles.put(uuid, new Profile());
+                Main.getLogger().info("Successfully loaded data of player of UUID %s".formatted(p.getUuid().toString()));
+            } catch (Exception e) {
+                try {
+                    profiles.put(uuid, gson.fromJson(Files.readString(BACKUP_PATH.resolve(uuid + ".json")), Profile.class));
+                    Main.getLogger().warn("Data of player of UUID %s is null/corrupted, retrieving from backup instead".formatted(p.getUuid().toString()));
+                } catch (Exception ee) {
+                    p.networkHandler.disconnect(Text.literal("Cannot retrieve backup file, please contact server staff"));
+                    Main.getLogger().error("Backup data of player of UUID %s is null/corrupted".formatted(p.getUuid().toString()));
+                }
             }
         } else {
             profiles.put(uuid, new Profile());
+            Main.getLogger().warn("Data of player of UUID %s not found, creating a new one".formatted(p.getUuid().toString()));
         }
     }
 

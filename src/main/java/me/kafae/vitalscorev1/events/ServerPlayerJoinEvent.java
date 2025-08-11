@@ -18,8 +18,7 @@ public class ServerPlayerJoinEvent {
 
     // event logic
     private void onServerPlayerJoin(ServerPlayerEntity p) {
-        Main.getDataHandler().loadProfile(p.getUuid().toString());
-        Main.getLogger().info("Successfully loaded data of player of UUID %s".formatted(p.getUuid().toString()));
+        Main.getDataHandler().loadProfile(p);
 
         // join msg
         p.sendMessage(Text.literal(Main.getConfigHandler().getConfig().getJoinMsg()));

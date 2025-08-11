@@ -23,6 +23,8 @@ public class StartServerTickEvent {
     // event logic
     private void onStartServerTick(MinecraftServer s) {
         s.execute(() -> {
+            Main.server = s;
+
             if (tick < 20) {
                 tick++;
                 return;
@@ -37,7 +39,7 @@ public class StartServerTickEvent {
                 try {
                     p.sendMessage(Text.literal("§c" + Main.getDataHandler().profiles.get(p.getUuid().toString()).getRm() + "x"), true);
                 } catch (Exception e) {
-                    p.networkHandler.disconnect(Text.literal("An unexpected error has occurred, please contact server staff"));
+                    p.networkHandler.disconnect(Text.literal("An unexpected error has occurred, please try to rejoin"));
                 }
 
             });
@@ -47,7 +49,6 @@ public class StartServerTickEvent {
                 save++;
             } else {
                 CompletableFuture.runAsync(() -> {
-                    System.out.println("incremental save");
                     plrs.forEach(p -> {
                         Main.getDataHandler().saveProfile(p.getUuid().toString(), true);
                     });

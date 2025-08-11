@@ -12,11 +12,9 @@ import me.kafae.vitalscorev1.items.head.RegenerationShard;
 import me.kafae.vitalscorev1.log4j.Log4JLogger;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 
 import java.io.IOException;
@@ -48,10 +46,10 @@ public class Main implements ModInitializer {
     }};
 
     public static final List<String> itemsIdList = new ArrayList<>() {{
-        itemStringMap.keySet().forEach(k -> {
-            add(k);
-        });
+        this.addAll(itemStringMap.keySet());
     }};
+
+    public static MinecraftServer server;
 
     public static boolean allowEndEscape = true;
 
