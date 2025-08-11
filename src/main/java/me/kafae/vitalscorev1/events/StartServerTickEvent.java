@@ -24,7 +24,12 @@ public class StartServerTickEvent {
         }
 
         s.getPlayerManager().getPlayerList().forEach(p -> {
-            p.sendMessage(Text.literal("§c" + Main.getDataHandler().profiles.get(p.getUuid().toString()).getRm() + "x"), true);
+            try {
+                p.sendMessage(Text.literal("§c" + Main.getDataHandler().profiles.get(p.getUuid().toString()).getRm() + "x"), true);
+            } catch (Exception e) {
+                p.networkHandler.disconnect(Text.literal("An unexpected error has occurred, please contact server staff"));
+            }
+
         });
         tick = 0;
     }
